@@ -10,7 +10,7 @@ class Subject extends Component {
             this.props.onChangePage();
           }.bind(this)}>{this.props.title}</a></h1>
           {this.props.sub}
-      </header>
+      </header>  
     );
   }
 }
