@@ -15,11 +15,13 @@ import Welcome from './components/Welcome';
 class App extends Component  {
   constructor(props) {
     super(props);
+    // max.contenct_id의 숫자는 contents의 마지막 id 값
+    this.max_content_id = 3;
     this.state = {
-      mode: 'read',
+      mode: 'create',
       selected_content_id:2,
       subject: {title: 'WEB', sub: 'World Wide Web!'},
-      welcome: {title: 'Welcome', desc: 'Hello, React!!'},  
+      welcome: {title: 'Welcome', desc: 'Hello, React!!'} ,  
       contents:[
         {id:1, title:'HTML', desc: 'HTMl is for information'},
         {id:2, title:'CSS', desc: 'CSS is for design'},
@@ -48,7 +50,19 @@ class App extends Component  {
       }
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>
     } else if (this.state.mode === 'create') {
-      _article = <CreateContent></CreateContent>
+      _article = <CreateContent onSubmit={function(_title, _desc) {
+        // add content to this.state.contents
+        this.max_content_id = this.max_content_id+1;
+        //this.state.contents.push(
+        //  {id:this.max_content_id, title:_title, desc:_desc}
+        //  );
+        var _contents = this.state.contents.concat(
+          {id:this.max_content_id, title:_title, desc:_desc}
+         )
+        this.setState({
+          contents:_contents
+        });
+      }.bind(this)}> </CreateContent>
     }
     return (
     <div className="App">
