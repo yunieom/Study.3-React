@@ -4,6 +4,7 @@ class UpdateContent extends Component {
   constructor(props) {
     super(props);
     this.state = { 
+      id: this.props.data.id,
       title: this.props.data.title,
       desc: this.props.data.desc
     }
@@ -22,8 +23,9 @@ class UpdateContent extends Component {
             onSubmit={function(e) {
               e.preventDefault();
               this.props.onSubmit(
-                e.target.title.value,
-                e.target.desc.value
+                this.state.id,
+                this.state.title,
+                this.state.desc
               );
               alert('submit!');
             }.bind(this)}
